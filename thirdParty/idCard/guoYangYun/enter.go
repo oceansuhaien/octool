@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/oceansuhaien/octool/validRule"
 	"io"
 	"net/http"
 	"net/url"
-	"octool/validRule"
 	"regexp"
 	"strconv"
 )
@@ -72,7 +72,6 @@ func (a *Client) Valid(name, idCardNo string) (ok bool, balance int, err error) 
 	}
 	request.Header.Set("Authorization", fmt.Sprintf("APPCODE %s", a.AppCode))
 	client := &http.Client{}
-	fmt.Println(request.Header)
 	resp, err := client.Do(request)
 	if err != nil {
 		return false, 0, ErrClientDo
@@ -90,7 +89,6 @@ func (a *Client) Valid(name, idCardNo string) (ok bool, balance int, err error) 
 	if err != nil {
 		return false, 0, ErrReadBody
 	}
-	fmt.Println("???", string(all))
 	var res response
 	err = json.Unmarshal(all, &res)
 	if err != nil {
