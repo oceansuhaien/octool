@@ -99,6 +99,7 @@ func (a *Client) Valid(name, idCardNo string) (ok bool, balance int, err error) 
 	if res.Code != "0" {
 		return false, balance, nil
 	}
+
 	if res.Data.ResponseCode != "0" {
 		return false, balance, ErrFail
 	}
